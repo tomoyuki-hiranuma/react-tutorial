@@ -14,7 +14,8 @@ module.exports = {
           options: {
             presets: ['@babel/preset-react', '@babel/preset-env'],
             plugins: [
-              ['@babel/plugin-proposal-class-properties', {'loose': true}]
+              ['@babel/plugin-proposal-class-properties', {'loose': true}], // bindの省略を可能に
+              ['react-html-attrs'], // htmlのパラメータ使えるよ
             ]
           }
         }]

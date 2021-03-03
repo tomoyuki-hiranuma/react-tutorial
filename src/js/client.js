@@ -12,8 +12,9 @@ ReactDOM.render(
   <Router>
     <Layout>
       <Route exact path="/" component={Featured}></Route>
-      <Route path="/archives" component={Archives}></Route>
-      <Route path="/setting" component={Settings}></Route>
+      <Route exact path="/archives" component={Archives}></Route>
+      <Route path="/archives/:article" component={Archives}></Route>
+      <Route path="/settings/:mode(main|extra)" component={Settings}></Route>
     </Layout>
   </Router>,
 app);
