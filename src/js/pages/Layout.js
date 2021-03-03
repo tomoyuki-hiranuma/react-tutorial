@@ -1,24 +1,30 @@
 import React from "react";
-import { NavLink, Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+
+import Footer from "../components/layout/Footer";
+import Nav from "../components/layout/Nav";
 
 class Layout extends React.Component {
-  navigate() {
-    console.log(this.props.history);
-    this.props.history.push("/");
-  }
   render() {
+    const { location } = this.props;
+    const containerStyle = {
+      marginTop: "60px"
+    };
+    console.log("layout");
     return (
       <div>
-        <h1>KillerNews.net</h1>
-        {this.props.children}
-        <Link to="/archives/some-other-article?date=yesterday&filter=none" className="btn btn-warning">archives(some other article)</Link>
-        <Link to="/archives?date=today&filter=hot" className="btn btn-danger">archives</Link>
-        <NavLink to="/settings/main" className="btn btn-success" activeClassName="btn btn-danger">settings</NavLink>
-        <Link to="/settings/extra" className="btn btn-success">settings(extra)</Link>
-        <button class="btn btn-info" onClick={this.navigate.bind(this)}>featured</button>
+        <Nav location={location} />
+        <div class="container" style={containerStyle}>
+          <div class="row">
+            <div class="col-lg-12">
+              <h1>KillerNews.net</h1>
+              {this.props.children}
+            </div>
+          </div>
+          <Footer/>
+        </div>
       </div>
     );
   }
 }
-
 export default withRouter(Layout);
