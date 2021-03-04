@@ -5,7 +5,7 @@ export default class Todo extends React.Component {
     super();
   }
   render() {
-    const { complete, edit, text } = this.props;
+    const { id, complete, edit, text } = this.props;
     const icon = complete ? "\u2714" : "\u2716";
 
     if (edit) {
@@ -17,6 +17,7 @@ export default class Todo extends React.Component {
     }
     return (
       <li>
+        <span>{id}: </span>
         <span>{text}</span>
         <span>{icon}</span>
       </li>

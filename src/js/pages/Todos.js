@@ -9,7 +9,8 @@ export default class Todos extends React.Component {
     super();
     this.getTodos = this.getTodos.bind(this);
     this.state = {
-      todos: TodoStore.getAll()
+      todos: TodoStore.getAll(),
+      newText: ""
     };
   }
 
@@ -23,7 +24,14 @@ export default class Todos extends React.Component {
   }
 
   createTodo() {
-    TodoActions.createTodo("New Todo");
+    const text = this.state.newText;
+    if(text !== "") {
+      TodoActions.createTodo(text);
+    }
+
+    this.setState({
+      newText: "",
+    });
   }
 
   getTodos() {
@@ -36,6 +44,12 @@ export default class Todos extends React.Component {
     TodoActions.reloadTodos();
   }
 
+  inputText(e) {
+    this.setState({
+      newText: e.target.value
+    });
+  }
+
   render(){
     const { todos } = this.state;
 
@@ -46,6 +60,7 @@ export default class Todos extends React.Component {
     return (
       <div>
         <button onClick={this.reloadTodos.bind(this)}>reload</button><br />
+        <input type="text" value={this.state.newText} onChange={this.inputText.bind(this)}></input><br />
         <button onClick={this.createTodo.bind(this)}>create</button>
         <h1>Todos</h1>
         <ul>{TodoComponents}</ul>
