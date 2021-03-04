@@ -10,7 +10,8 @@ export default class Todos extends React.Component {
     this.getTodos = this.getTodos.bind(this);
     this.state = {
       todos: TodoStore.getAll(),
-      newText: ""
+      newText: "",
+      deleteId: "",
     };
   }
 
@@ -44,9 +45,24 @@ export default class Todos extends React.Component {
     TodoActions.reloadTodos();
   }
 
+  deleteTodo() {
+    const id = this.state.deleteId;
+    TodoActions.deleteTodo(id);
+    this.setState({
+      deleteId: "",
+      todos: TodoStore.getAll()
+    });
+  }
+
   inputText(e) {
     this.setState({
       newText: e.target.value
+    });
+  }
+
+  inputId(e) {
+    this.setState({
+      deleteId: e.target.value
     });
   }
 
@@ -64,6 +80,8 @@ export default class Todos extends React.Component {
         <button onClick={this.createTodo.bind(this)}>create</button>
         <h1>Todos</h1>
         <ul>{TodoComponents}</ul>
+        <input type="text" value={this.state.deleteId} onChange={this.inputId.bind(this)}></input>
+        <button onClick={this.deleteTodo.bind(this)}>delete</button>
       </div>
     )
   }
