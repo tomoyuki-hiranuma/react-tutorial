@@ -19,13 +19,13 @@ class TodoStore extends EventEmitter {
   }
 
   createTodo(text) {
-    const id = Date.now()
+    const id = Date.now();
 
     this.todos.push({
       id,
       text,
       complete: false
-    })
+    });
 
     this.emit("change");
   }
@@ -43,9 +43,11 @@ class TodoStore extends EventEmitter {
     switch(action.type){
       case "CREATE_TODO": {
         this.createTodo(action.text);
+        break;
       }
       case "RECEIVE_TODOS": {
-        this.receiveTodos(action.todos)
+        this.receiveTodos(action.todos);
+        break;
       }
     }
   }
