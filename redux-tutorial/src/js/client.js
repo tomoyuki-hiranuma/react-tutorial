@@ -37,6 +37,7 @@ store.subscribe(() => {
 
 store.dispatch((dispatch) => {
   dispatch({type: "FETCH_USERS_START"});
+  // mockサーバー立てる
   axios.get("http://localhost:18080").then((response) => {
     dispatch({type: "RECEIVE_USERS", payload: response.data});
   }).catch((err) => {
